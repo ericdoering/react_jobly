@@ -10,6 +10,7 @@ import Profile from "./routes/Profile"
 import Login from "./routes/Login";
 import RegistrationForm from "./forms/RegistrationForm";
 import LoginForm from "./forms/LoginForm";
+import LandingPage from "./LandingPage";
 
 function App() {
 
@@ -19,6 +20,9 @@ function App() {
         <NavBar />
           <main>
               <Switch>
+                  <Route exact path="/">
+                      <LandingPage />
+                  </Route>
                   <Route path="/home">
                       <Home />
                   </Route>
@@ -33,6 +37,9 @@ function App() {
                   </Route>
                   <Route path="/login">
                         <LoginForm />
+                  </Route>
+                  <Route exact path="/register">
+                        <RegistrationForm />
                   </Route>
                   <Route>
                       <NotFound />

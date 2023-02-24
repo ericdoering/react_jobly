@@ -1,7 +1,10 @@
 import React, { useState } from "react"
-import {v4 as uuid} from "uuid";
+import {v4 as uuid} from "uuid"; 
+import { useHistory } from "react-router-dom";
+import JoblyApi from "../api/api";
 
 function RegistrationForm({ usernameSubmit, passwordSubmit, firstNameSubmit, lastNameSubmit, emailSubmit }) {
+  const history = useHistory()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -29,23 +32,22 @@ function RegistrationForm({ usernameSubmit, passwordSubmit, firstNameSubmit, las
   };
 
 
-  const gatherInputs = evt => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    username({ usernameSubmit, id: uuid() });
-    setUsername("");
-    password({ passwordSubmit, id: uuid() });
-    setPassword("");
-    password({ firstNameSubmit, id: uuid() });
-    setPassword("");
-    password({ lastNameSubmit, id: uuid() });
-    setPassword("");
-    password({ emailSubmit, id: uuid() });
-    setPassword("");
-    };
+    async function signup() {
+      const token = await JoblyApi.signup(username, password, firstName, lastName, email);
+      if(token) {
+        localStorage.setItem('auth-token', token)
+        history.push('/home')
+      }
+    }
+    signup()
+};
+
 
   return (
     <div>
-      <form onSubmit={gatherInputs}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
           id="username"

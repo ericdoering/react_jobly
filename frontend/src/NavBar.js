@@ -3,14 +3,18 @@ import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from "reactstrap";
 
 function NavBar() {
+
+  const loggedIn = !!localStorage.getItem('auth-token')
+  console.log(loggedIn)
   return (
     <div>
       <Navbar expand="md">
-        <NavLink exact to="/home" className="navbar-brand">
+        <NavLink exact to={loggedIn ? "/home" : '/'} className="navbar-brand">
           Jobly
         </NavLink>
 
         <Nav className="ml-auto" navbar>
+        {loggedIn && <>
           <NavItem>
             <NavLink to="/home">Home</NavLink>
           </NavItem>
@@ -23,9 +27,17 @@ function NavBar() {
           <NavItem>
             <NavLink to="/profile">Profile</NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink to="/login">Login</NavLink>
-          </NavItem>
+          </>
+          }
+          {!loggedIn && <>
+            <NavItem>
+              <NavLink to="/login">Login</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink to="/register">Register</NavLink>
+            </NavItem>
+            </>
+          }       
         </Nav>
       </Navbar>
     </div>
