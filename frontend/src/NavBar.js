@@ -5,7 +5,6 @@ import { Navbar, Nav, NavItem } from "reactstrap";
 function NavBar() {
 
   const loggedIn = !!localStorage.getItem('auth-token')
-  console.log(loggedIn)
   return (
     <div>
       <Navbar expand="md">

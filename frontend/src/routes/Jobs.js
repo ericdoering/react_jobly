@@ -9,6 +9,7 @@ function Jobs() {
     useEffect(() => {
       async function fetchJobs() {
         let jobData = await JoblyApi.getJobs();
+  
         setJobs(jobData)
         setIsLoading(false)
       }

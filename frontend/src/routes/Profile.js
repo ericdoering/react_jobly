@@ -1,8 +1,9 @@
 import React from "react";
+import ProfileForm from "../forms/ProfileForm";
 
 function Profile() {
   return (
-    <h1>Testing</h1>
+    <ProfileForm />
   );
 }
 
