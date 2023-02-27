@@ -8,6 +8,8 @@ function SearchBar() {
       const history = useHistory()
       const [searchItem, setSearch] = useState("");
       const [isLoading, setIsLoading] = useState(true);
+      const [setCompanies] = useState([]);
+
 
     
       const handleChangeSearchItem = evt => {
@@ -17,16 +19,16 @@ function SearchBar() {
       const handleSubmit = (evt) => {
         evt.preventDefault();
         async function Search() {
-            let sendSearch = searchItem;
-        //   const companyRes = await JoblyApi.getCompany(searchItem);
-        //   console.log("TESTING:", companyRes)
-        //   if(companyRes) {
-        //     history.push('/companies')
-        //   }
+   
+          const companyRes = await JoblyApi.getCompany(searchItem);
+          console.log("TESTING:", companyRes)
+          setCompanies(companyRes);
+          if(companyRes) {
+            history.push('/companies')
+          }
         }
         Search()
     };
-
     
       return (
         <div>

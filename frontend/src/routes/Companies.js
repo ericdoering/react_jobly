@@ -13,6 +13,7 @@ function Companies() {
       async function fetchCompanies() {
           let companyData = await JoblyApi.getCompanies();
           setCompanies(companyData)
+          
       
         // setCompanies(companyData)
         setIsLoading(false)

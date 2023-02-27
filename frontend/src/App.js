@@ -11,41 +11,16 @@ import Login from "./routes/Login";
 import RegistrationForm from "./forms/RegistrationForm";
 import LoginForm from "./forms/LoginForm";
 import LandingPage from "./LandingPage";
+import Router from "./Router"
+
+import "./App.css";
 
 function App() {
 
   return (
     <div className="App">
       <BrowserRouter>
-        <NavBar />
-          <main>
-              <Switch>
-                  <Route exact path="/">
-                      <LandingPage />
-                  </Route>
-                  <Route path="/home">
-                      <Home />
-                  </Route>
-                  <Route path="/companies">
-                      <Companies />
-                  </Route>
-                  <Route path="/jobs">
-                      <Jobs />
-                  </Route>
-                  <Route path="/profile">
-                      <Profile />
-                  </Route>
-                  <Route path="/login">
-                        <LoginForm />
-                  </Route>
-                  <Route exact path="/register">
-                        <RegistrationForm />
-                  </Route>
-                  <Route>
-                      <NotFound />
-                  </Route>
-              </Switch>
-          </main>
+        <Router/>
       </BrowserRouter>
     </div>
   );
