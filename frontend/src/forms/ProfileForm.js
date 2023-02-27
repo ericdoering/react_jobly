@@ -2,22 +2,15 @@ import React, { useState } from "react"
 import {v4 as uuid} from "uuid"; 
 import { useHistory } from "react-router-dom";
 import JoblyApi from "../api/api";
+import { parseJwt } from "../jwt"
 
-function ProfileForm({ usernameSubmit, passwordSubmit, firstNameSubmit, lastNameSubmit, emailSubmit }) {
+function ProfileForm({ usernameSubmit, firstNameSubmit, lastNameSubmit, emailSubmit }) {
   const history = useHistory()
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const token = localStorage.getItem("auth-token");
+  const username = parseJwt(token)["username"];
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-
-  const handleChangeUsername = evt => {
-    setUsername(evt.target.value);
-  };
-
-  const handleChangePassword = evt => {
-    setPassword(evt.target.value);
-  };
 
   const handleChangeFirstName = evt => {
     setFirstName(evt.target.value);
@@ -35,11 +28,9 @@ function ProfileForm({ usernameSubmit, passwordSubmit, firstNameSubmit, lastName
   const handleSubmit = (evt) => {
     evt.preventDefault();
     async function edit() {
-      const token = await JoblyApi.edit(username, password, firstName, lastName, email);
-      if(token) {
-        localStorage.setItem('auth-token', token)
-        history.push('/home')
-      }
+      const user = await JoblyApi.edit(username, firstName, lastName, email);
+      console.log(user)
+      history.push('/home')
     }
     edit()
 };
@@ -52,17 +43,9 @@ function ProfileForm({ usernameSubmit, passwordSubmit, firstNameSubmit, lastName
         <input
           id="username"
           name="username"
+          disabled
           type="text"
-          onChange={handleChangeUsername}
           value={username}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          name="password"
-          type="text"
-          onChange={handleChangePassword}
-          value={password}
         />
         <label htmlFor="firstName">First Name:</label>
         <input

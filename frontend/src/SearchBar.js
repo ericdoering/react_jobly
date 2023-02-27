@@ -20,7 +20,7 @@ function SearchBar() {
         evt.preventDefault();
         async function Search() {
    
-          const companyRes = await JoblyApi.getCompany(searchItem);
+          const companyRes = await JoblyApi.getCompanies(searchItem);
           console.log("TESTING:", companyRes)
           setCompanies(companyRes);
           if(companyRes) {
