@@ -1,16 +1,33 @@
 import React from "react";
+import JobDetail from "./JobDetail"
 
-function JobCard({jobData}) {
-    const title = jobData['title'];
-    const salary = jobData['salary']
-    const equity = jobData['equity']
-    return (
-    <div>
-        <h1>Title: {title}</h1>
-        <p>Salary: {salary}</p>
-        <p>Equity: {equity}</p>
-    </div>
-    )
+/** Show list of job cards.
+ *
+ * Used by both JobList and CompanyDetail to list jobs. Receives an apply
+ * func prop which will be called by JobCard on apply.
+ *
+ * JobList -> JobCardList -> JobCard
+ * CompanyDetail -> JobCardList -> JobCard
+ *
+ */
+
+function JobCard({ jobs, apply }) {
+  console.debug("JobCardList", "jobs=", jobs);
+
+  return (
+      <div className="JobCardList">
+        {jobs.map(job => (
+            <JobDetail
+                key={job.id}
+                id={job.id}
+                title={job.title}
+                salary={job.salary}
+                equity={job.equity}
+                companyName={job.companyName}
+            />
+        ))}
+      </div>
+  );
 }
 
 export default JobCard;
