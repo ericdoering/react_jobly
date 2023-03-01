@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import UserContext from "../UserContext"
+import { UserContext } from "../UserContext"
 
 /** Show limited information about a job.
  *
@@ -14,11 +14,11 @@ function JobDetail({ id, title, salary, equity, companyName }) {
   console.debug("JobCard");
 
   const { hasAppliedToJob, applyToJob } = useContext(UserContext);
-  const [applied, setApplied] = useState();
+  const [applied, setApplied] = useState([]);
 
   React.useEffect(function updateAppliedStatus() {
     console.debug("JobCard useEffect updateAppliedStatus", "id=", id);
-
+     
     setApplied(hasAppliedToJob(id));
   }, [id, hasAppliedToJob]);
 

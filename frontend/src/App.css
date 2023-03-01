@@ -1,4 +1,17 @@
 .App {
     background-color: rgb(219, 239, 246);
-    height: 1000px;
+}
+
+button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
 }

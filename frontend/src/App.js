@@ -14,13 +14,28 @@ import LandingPage from "./LandingPage";
 import Router from "./Router"
 
 import "./App.css";
+import { UserContext } from "./UserContext";
 
 function App() {
+
+
+    function hasAppliedToJob() {
+        return console.log("Works!")
+    }
+    function applyToJob() {
+        return console.log("Works!")
+    }
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Router/>
+        <UserContext.Provider value={{
+            hasAppliedToJob,
+            applyToJob
+
+        }}>
+            <Router/>
+        </UserContext.Provider>
       </BrowserRouter>
     </div>
   );

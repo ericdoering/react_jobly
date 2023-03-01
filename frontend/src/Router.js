@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import NavBar from "./NavBar";
+import CompanyDetail from "./company/CompanyDetail"
 import Home from "./routes/Home";
 import NotFound from "./routes/NotFound";
 import Companies from "./routes/Companies";
@@ -12,6 +13,7 @@ import LoginForm from "./forms/LoginForm";
 import LandingPage from "./LandingPage";
 
 import "./App.css";
+
 
 function Router() {
 
@@ -28,6 +30,9 @@ function Router() {
                   </Route>
                   <Route path="/companies">
                       <Companies />
+                  </Route>
+                  <Route exact path="/companies/:handle">
+                      <CompanyDetail />
                   </Route>
                   <Route path="/jobs">
                       <Jobs />
