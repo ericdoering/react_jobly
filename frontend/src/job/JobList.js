@@ -26,13 +26,14 @@ function JobList() {
   /** Triggered by search form submit; reloads jobs. */
   async function search(title) {
     let jobs = await JoblyApi.getJobs(title);
+    console.log("JOBS SHOULD BE HERE", jobs)
     setJobs(jobs);
   }
 
   return (
       <div className="JobList col-md-8 offset-md-2">
         <SearchBar searchFor={search} />
-        {jobs.length
+        {jobs?.length
             ? <JobCard jobs={jobs} />
             : <p className="lead">Sorry, no results were found!</p>
         }

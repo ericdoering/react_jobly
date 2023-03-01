@@ -17,7 +17,7 @@ function CompanyDetail() {
   const { handle } = useParams();
   console.debug("CompanyDetail", "handle=", handle);
 
-  const [company, setCompany] = useState(null);
+  const [company, setCompany] = useState([]);
 
   useEffect(function getCompanyAndJobsForUser() {
     async function getCompany() {

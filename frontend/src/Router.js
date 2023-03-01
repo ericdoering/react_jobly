@@ -12,14 +12,14 @@ import RegistrationForm from "./forms/RegistrationForm";
 import LoginForm from "./forms/LoginForm";
 import LandingPage from "./LandingPage";
 
-import "./App.css";
+import "./Router.css"
 
 
 function Router() {
 
   return (
     <>
-        <NavBar />
+        <NavBar className="nav-bar" />
           <main>
               <Switch>
                   <Route exact path="/">
@@ -28,10 +28,10 @@ function Router() {
                   <Route path="/home">
                       <Home />
                   </Route>
-                  <Route path="/companies">
+                  <Route exact path="/companies">
                       <Companies />
                   </Route>
-                  <Route exact path="/companies/:handle">
+                  <Route path="/companies/:handle">
                       <CompanyDetail />
                   </Route>
                   <Route path="/jobs">
