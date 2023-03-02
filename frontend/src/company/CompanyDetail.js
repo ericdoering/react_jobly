@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "../api/api";
 import JobCard from "../job/JobCard";
-import JobList from "../job/JobList"
+
+import "./CompanyDetail";
 
 /** Company Detail page.
  *
@@ -29,7 +30,7 @@ function CompanyDetail() {
 
   return (
       <div className="CompanyDetail col-md-8 offset-md-2">
-        <h4>{company.name}</h4>
+        <h4 className="company-title">{company.name}</h4>
         <p>{company.description}</p>
         <JobCard jobs={company.jobs} />
       </div>
