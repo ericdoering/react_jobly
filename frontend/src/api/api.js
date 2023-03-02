@@ -42,6 +42,10 @@ class JoblyApi {
   //   let res = await this.request(`jobs/${title}`)
   //   return res.jobs;
   // }
+  static async getCurrentUser(username) {
+    let res = await this.request(`users/${username}`);
+    return res.user;
+  }
 
   static async getJobs(title) {
     let res = await this.request(`jobs`, { title });
@@ -56,6 +60,10 @@ class JoblyApi {
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;
+  }
+
+  static async applyToJob(username, id) {
+    await this.request(`users/${username}/jobs/${id}`, {}, "post");
   }
 
   // obviously, you'll add a lot here ...

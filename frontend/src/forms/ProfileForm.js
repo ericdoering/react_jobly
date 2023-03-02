@@ -29,7 +29,6 @@ function ProfileForm({ usernameSubmit, firstNameSubmit, lastNameSubmit, emailSub
     evt.preventDefault();
     async function edit() {
       const user = await JoblyApi.edit(username, firstName, lastName, email);
-      console.log(user)
       history.push('/home')
     }
     edit()

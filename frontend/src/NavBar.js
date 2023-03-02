@@ -22,7 +22,6 @@ function NavBar() {
 
   useEffect(() => {
     const tokenExists = localStorage.getItem('auth-token');
-    console.log(loginMatch, signupMatch, landingPageMatch)
     if(loginMatch || signupMatch || landingPageMatch) {
       if(tokenExists) {
       setLoggedIn(true)
@@ -31,7 +30,6 @@ function NavBar() {
       }
     }
     else if(!tokenExists) {
-      console.log('here')
       setLoggedIn(false)
       history.push('/')
       return
@@ -52,25 +50,25 @@ function NavBar() {
         <Nav className="ml-auto" navbar>
         {loggedIn && <>
           <NavItem>
-            <NavLink to="/companies">Companies</NavLink>
+            <NavLink className="nav-el" to="/companies">Companies</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/jobs">Jobs</NavLink>
+            <NavLink className="nav-el" to="/jobs">Jobs</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink to="/profile">Profile</NavLink>
+            <NavLink className="nav-el" to="/profile">Profile</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink onClick={logout} to="/">Log out</NavLink>
+            <NavLink className="nav-el" onClick={logout} to="/">Log out</NavLink>
           </NavItem>
           </>
           }
           {!loggedIn && <>
             <NavItem>
-              <NavLink to="/login">Login</NavLink>
+              <NavLink className="nav-el" to="/login">Login</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/register">Register</NavLink>
+              <NavLink className="nav-el" to="/register">Register</NavLink>
             </NavItem>
             </>
           }       

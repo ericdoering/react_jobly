@@ -1,35 +1,80 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import useLocalStorage from "./useLocalStorage"
 
-import NavBar from "./NavBar";
-import Home from "./routes/Home";
-import NotFound from "./routes/NotFound";
-import Companies from "./routes/Companies";
-import Jobs from "./routes/Jobs";
-import Profile from "./routes/Profile"
-import Login from "./routes/Login";
-import RegistrationForm from "./forms/RegistrationForm";
-import LoginForm from "./forms/LoginForm";
-import LandingPage from "./LandingPage";
+
+import jwt from "jsonwebtoken";
+
 import Router from "./Router"
+import JoblyApi from "./api/api";
+
 
 import "./App.css";
 import { UserContext } from "./UserContext";
+import { Alert } from "reactstrap";
+
+
+export const TOKEN_STORAGE_ID = "jobly-token";
 
 function App() {
+  const [infoLoaded, setInfoLoaded] = useState(false);
+  const [applicationIds, setApplicationIds] = useState(new Set([]));
+  const [currentUser, setCurrentUser] = useState("");
+  const [token, setToken] = useLocalStorage(TOKEN_STORAGE_ID);
+
+  console.debug(
+      "App",
+      "infoLoaded=", infoLoaded,
+      "currentUser=", currentUser,
+      "token=", token,
+  );
 
 
-    function hasAppliedToJob() {
-        return console.log("Works!")
+  useEffect(function loadUserInfo() {
+    console.debug("App useEffect loadUserInfo", "token=", token);
+
+    async function getCurrentUser() {
+      if (token) {
+        try {
+          let { username } = jwt.decode(token);
+          // put the token on the Api class so it can use it to call the API.
+          JoblyApi.token = token;
+          let currentUser = await JoblyApi.getCurrentUser(username);
+          setCurrentUser(currentUser);
+          setApplicationIds(new Set(currentUser.applications));
+        } catch (err) {
+          console.error("App loadUserInfo: problem loading", err);
+          setCurrentUser(null);
+        }
+      }
+      setInfoLoaded(true);
     }
-    function applyToJob() {
-        return console.log("Works!")
+
+    // set infoLoaded to false while async getCurrentUser runs; once the
+    // data is fetched (or even if an error happens!), this will be set back
+    // to false to control the spinner.
+    setInfoLoaded(false);
+    getCurrentUser();
+  }, [token]);
+
+
+  
+    function hasAppliedToJob(id) {
+      return applicationIds.has(id);
+    }
+
+    function applyToJob(id) {
+      if (hasAppliedToJob(id)) return;
+      JoblyApi.applyToJob(currentUser.username, id);
+      setApplicationIds(new Set([...applicationIds, id]));
     }
 
   return (
     <div className="App">
       <BrowserRouter>
         <UserContext.Provider value={{
+            currentUser,
+            setCurrentUser,
             hasAppliedToJob,
             applyToJob
 

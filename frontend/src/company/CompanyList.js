@@ -29,8 +29,6 @@ function CompanyList() {
     setCompanies(companies);
   }
 
-  console.log("Companies!!!:", companies)
-
   return (
       <div className="CompanyList col-md-8 offset-md-2">
         <SearchBar searchFor={search} />
