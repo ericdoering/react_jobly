@@ -13,7 +13,7 @@ function SearchBar({ searchFor }) {
     setSearchTerm(searchTerm.trim());
   }
 
-  /** Update form fields */
+
   function handleChange(evt) {
     setSearchTerm(evt.target.value);
   }

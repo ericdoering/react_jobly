@@ -1,14 +1,7 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../UserContext"
 
-/** Show limited information about a job.
- *
- * Is rendered by JobCardList to show a "card" for each job.
- *
- * Receives apply func prop from parent, which is called on apply.
- *
- * JobCardList -> JobCard
- */
+
 
 function JobDetail({ id, title, salary, equity, companyName }) {
   console.debug("JobCard");
@@ -22,7 +15,7 @@ function JobDetail({ id, title, salary, equity, companyName }) {
     setApplied(hasAppliedToJob(id));
   }, [id, hasAppliedToJob]);
 
-  /** Apply for a job */
+
   async function handleApply(evt) {
     if (hasAppliedToJob(id)) return;
     applyToJob(id);
@@ -48,7 +41,7 @@ function JobDetail({ id, title, salary, equity, companyName }) {
   );
 }
 
-/** Render integer salary like '$1,250,343' */
+
 
 function formatSalary(salary) {
   const digitsRev = [];

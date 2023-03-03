@@ -3,15 +3,6 @@ import SearchBar from "../SearchBar";
 import JoblyApi from "../api/api";
 import CompanyCard from "../company/CompanyCard"
 
-/** Show page with list of companies.
- *
- * On mount, loads companies from API.
- * Re-loads filtered companies on submit from search form.
- *
- * This is routed to at /companies
- *
- * Routes -> { CompanyCard, SearchForm }
- */
 
 function CompanyList() {
 
@@ -23,7 +14,7 @@ function CompanyList() {
   }, []);
 
 
-  /** Triggered by search form submit; reloads companies. */
+
   async function search(name) {
     let companies = await JoblyApi.getCompanies(name);
     setCompanies(companies);
@@ -41,7 +32,7 @@ function CompanyList() {
                           handle={c.handle}
                           name={c.name}
                           description={c.description}
-                        //   logoUrl={c.logoUrl}
+                          logoUrl={c.logoUrl}
                       />
                   ))}
                 </div>

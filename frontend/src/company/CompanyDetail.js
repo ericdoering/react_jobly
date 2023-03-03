@@ -5,14 +5,6 @@ import JobCard from "../job/JobCard";
 
 import "./CompanyDetail";
 
-/** Company Detail page.
- *
- * Renders information about company, along with the jobs at that company.
- *
- * Routed at /companies/:handle
- *
- * Routes -> CompanyDetail -> JobCardList
- */
 
 function CompanyDetail() {
   const { handle } = useParams();

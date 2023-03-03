@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import useLocalStorage from "./useLocalStorage"
 
 
@@ -37,7 +37,7 @@ function App() {
       if (token) {
         try {
           let { username } = jwt.decode(token);
-          // put the token on the Api class so it can use it to call the API.
+        
           JoblyApi.token = token;
           let currentUser = await JoblyApi.getCurrentUser(username);
           setCurrentUser(currentUser);
@@ -50,9 +50,7 @@ function App() {
       setInfoLoaded(true);
     }
 
-    // set infoLoaded to false while async getCurrentUser runs; once the
-    // data is fetched (or even if an error happens!), this will be set back
-    // to false to control the spinner.
+  
     setInfoLoaded(false);
     getCurrentUser();
   }, [token]);
