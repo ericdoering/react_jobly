@@ -14,7 +14,7 @@ import { UserContext } from "./UserContext";
 import { Alert } from "reactstrap";
 
 
-export const TOKEN_STORAGE_ID = "jobly-token";
+export const TOKEN_STORAGE_ID = "auth-token";
 
 function App() {
   const [infoLoaded, setInfoLoaded] = useState(false);
@@ -34,9 +34,11 @@ function App() {
     console.debug("App useEffect loadUserInfo", "token=", token);
 
     async function getCurrentUser() {
+      console.log(token);
       if (token) {
         try {
           let { username } = jwt.decode(token);
+          console.log(jwt.decode(token))
         
           JoblyApi.token = token;
           let currentUser = await JoblyApi.getCurrentUser(username);

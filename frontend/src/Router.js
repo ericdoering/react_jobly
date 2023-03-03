@@ -20,7 +20,7 @@ function Router() {
   return (
     <>
         <NavBar className="nav-bar" />
-          <main>
+          <main className="main">
               <Switch>
                   <Route exact path="/">
                       <LandingPage />
