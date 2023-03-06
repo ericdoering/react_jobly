@@ -4,6 +4,7 @@
 
 const express = require("express");
 const cors = require("cors");
+const path = require('path'); 
 
 const { NotFoundError } = require("./expressError");
 
@@ -27,6 +28,8 @@ app.use("/companies", companiesRoutes);
 app.use("/users", usersRoutes);
 app.use("/jobs", jobsRoutes);
 
+app.use(express.static('build'));
+
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
@@ -43,5 +46,6 @@ app.use(function (err, req, res, next) {
     error: { message, status },
   });
 });
+
 
 module.exports = app;
